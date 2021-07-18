@@ -1,0 +1,77 @@
+@article{verbaten1997processing,
+  title={Processing capacity and the frontal P3},
+  author={Verbaten, MN and Huyben, MA and Kemner, C},
+  journal={International Journal of Psychophysiology},
+  volume={25},
+  number={3},
+  pages={237--248},
+  year={1997},
+  publisher={Elsevier}
+}
+
+@article{Huang_Chen_Zhang_2015,
+   title={The neurophysiology of P 300--an integrated review},
+   volume={19}, ISSN={2284-0729},
+   number={8},
+   journal={European Review for Medical and Pharmacological Sciences},
+   author={Huang, W.-J. and Chen, W.-W. and Zhang, X.},
+   year={2015},
+   month={Apr},
+   pages={1480–1488}
+ }
+
+@article{Rousselet_2004,
+	doi = {10.1167/4.1.2},
+	url = {https://doi.org/10.1167%2F4.1.2},
+	year = 2004,
+	month = {jan},
+	publisher = {Association for Research in Vision and Ophthalmology ({ARVO})},
+	volume = {4},
+	number = {1},
+	pages = {2--2},
+	author = {G. A. Rousselet and M. J.-M. Mace and M. Fabre-Thorpe},
+	title = {Animal and human faces in natural scenes: How specific to human faces is the N170 {ERP} component?},
+	journal = {Journal of Vision}
+}
+
+@article{Rossion_2014,
+	doi = {10.1016/j.tics.2014.02.013},
+	url = {https://doi.org/10.1016%2Fj.tics.2014.02.013},
+	year = 2014,
+	month = {jun},
+	publisher = {Elsevier {BV}},
+	volume = {18},
+	number = {6},
+	pages = {310--318},
+	author = {Bruno Rossion},
+	title = {Understanding face perception by means of human electrophysiology},
+	journal = {Trends in Cognitive Sciences}
+}
+
+@article{Rossion_2011,
+	doi = {10.1016/j.visres.2011.04.003},
+	url = {https://doi.org/10.1016%2Fj.visres.2011.04.003},
+	year = 2011,
+	month = {jun},
+	publisher = {Elsevier {BV}},
+	volume = {51},
+	number = {12},
+	pages = {1297--1311},
+	author = {Bruno Rossion and St{\'{e}}phanie Caharel},
+	title = {{ERP} evidence for the speed of face categorization in the human brain: Disentangling the contribution of low-level visual cues from face perception},
+	journal = {Vision Research}
+}
+
+@article{George_2005,
+	doi = {10.1016/j.cogbrainres.2005.03.017},
+	url = {https://doi.org/10.1016%2Fj.cogbrainres.2005.03.017},
+	year = 2005,
+	month = {aug},
+	publisher = {Elsevier {BV}},
+	volume = {24},
+	number = {3},
+	pages = {663--673},
+	author = {Nathalie George and Boutheina Jemel and Nicole Fiori and Laurence Chaby and Bernard Renault},
+	title = {Electrophysiological correlates of facial decision: Insights from upright and upside-down Mooney-face perception},
+	journal = {Cognitive Brain Research}
+}
