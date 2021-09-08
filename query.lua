@@ -61,7 +61,7 @@ local titles = {}
 local function get_text_value(bufnr, row1, col1, row2, col2)
     local lines = vim.api.nvim_buf_get_lines(bufnr, row1, row2 + 1, 1)
     lines[1] = string.sub(lines[1], col1 + 1, -1)
-    lines[#lines] = string.sub(lines[#lines], 0, col2 - 2)
+    lines[#lines] = string.sub(lines[#lines], 0, col2 - 1)
     local text = table.concat(lines, ' ')
     return text
 end
