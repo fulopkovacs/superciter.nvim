@@ -1,5 +1,5 @@
 -- INFO: run this file with: `:luafile%`
-local bufnr = 6
+local bufnr = 25
 local ts = vim.treesitter
 local ts_utils = require 'nvim-treesitter.ts_utils'
 
@@ -32,13 +32,19 @@ local parsed_query = ts.parse_query('bibtex', query)
 local ids = {}
 local titles = {}
 
+-- Remove enclosing "-s and {}-s
+local function strip_value(value)
+    if value:sub(1, 1) == '"' or value:sub(1, 1) == '{' then value = string.sub(value, 2, #value - 2) end
+    return value
+end
+
 -- Get text value from the file
 local function get_text_value(bufnr, row1, col1, row2, col2)
     local lines = vim.api.nvim_buf_get_lines(bufnr, row1, row2 + 1, 1)
     lines[1] = string.sub(lines[1], col1 + 1, -1)
     lines[#lines] = string.sub(lines[#lines], 0, col2 - 2)
     local text = table.concat(lines, ' ')
-    return text
+    return strip_value(text)
 end
 
 -- Collect the nodes
@@ -52,5 +58,5 @@ end
 -- if #ids == #titles then for i = 1, #titles do print(ids[i], titles[i]) end end
 -- print(#ids)
 print(#titles)
-print(titles[3])
-for i in 1,#titles do print(titles[i]) end
+-- print(titles[3])
+for i = 1, #titles do print(titles[i]) end
