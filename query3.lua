@@ -13,12 +13,38 @@ local document = tstree:root()
 -- read document
 local start_range, _, end_range, _ = document:range()
 
-local query = [[
-((identifier)@i (value)@v (#eq? @i "title"))
-]]
 -- local query = [[
--- ((value)@v)
+-- ((identifier)@i (value)@v (#eq? @i "title"))
 -- ]]
+local query = [[
+((identifier)@i (value)@v (#any-of? @i "title"))
+]]
+
+-- SOME VALID QUERIES
+--[[
+((identifier)@i (value)@v (#eq? @i "title"))
+
+(key_brace) @k
+
+(
+  (key_brace)@k
+  (field (
+    (identifier) @i
+    (value) @v
+  ))@f
+)
+
+
+(
+  (key_brace)@k
+  (field (
+    (identifier) @i
+    (value) @v
+    (#any-of? @i "title" "author")
+  ))@f
+)
+
+]] --
 
 local parsed_query = ts.parse_query('bibtex', query)
 
@@ -31,6 +57,12 @@ local parsed_query = ts.parse_query('bibtex', query)
 
 local ids = {}
 local titles = {}
+
+--[[
+1. set id in metadata
+2. then we  can have entreis like this:
+local entries = {ab94= {author, title, year}}
+--]]
 
 -- Remove enclosing "-s and {}-s
 local function strip_value(value)
