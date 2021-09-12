@@ -1,5 +1,5 @@
 -- INFO: run this file with: `:luafile%`
-local bufnr = 25
+local bufnr = 11
 local ts = vim.treesitter
 local ts_utils = require 'nvim-treesitter.ts_utils'
 
@@ -71,11 +71,19 @@ local function strip_value(value)
 end
 
 -- Get text value from the file
-local function get_text_value(bufnr, row1, col1, row2, col2)
-    local lines = vim.api.nvim_buf_get_lines(bufnr, row1, row2 + 1, 1)
-    lines[1] = string.sub(lines[1], col1 + 1, -1)
-    lines[#lines] = string.sub(lines[#lines], 0, col2 - 2)
-    local text = table.concat(lines, ' ')
+local function get_text_value(bufnr, node)
+    local row1, col1, row2, col2 = node:range()
+    local lines = vim.api.nvim_buf_get_lines(bufnr, row1, row2 + 1, 0)
+    local text = ''
+    if row1 == row2 then
+        -- Every word in the title is on the same line
+        text = string.sub(lines[1], col1 + 1, col2 + 1)
+    else
+        -- The title is broken into multiple lines
+        lines[1] = string.sub(lines[1], col1 + 1, -1)
+        lines[#lines] = string.sub(lines[#lines], 0, col2 + 1)
+        text = table.concat(lines, ' ')
+    end
     return strip_value(text)
 end
 
@@ -83,12 +91,15 @@ end
 for id, node, metadata in parsed_query:iter_captures(document, bufnr, start_range, end_range) do
     local captured_name = parsed_query.captures[id] -- name of the capture in the query
     local type = node:type()
-    local text = get_text_value(bufnr, node:range())
+    local text = get_text_value(bufnr, node)
     if type == "value" then table.insert(titles, text) end
+    -- if id ~= 1 then break end -- TODO: remove after testing
 end
 
 -- if #ids == #titles then for i = 1, #titles do print(ids[i], titles[i]) end end
 -- print(#ids)
 print(#titles)
 -- print(titles[3])
+-- print(vim.inspect(titles))
 for i = 1, #titles do print(titles[i]) end
+-- print(titles[1])
