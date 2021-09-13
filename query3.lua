@@ -13,12 +13,12 @@ local document = tstree:root()
 -- read document
 local start_range, _, end_range, _ = document:range()
 
--- local query = [[
--- ((identifier)@i (value)@v (#eq? @i "title"))
--- ]]
 local query = [[
-((identifier)@i (value)@v (#any-of? @i "title" "author"))
+((identifier)@i (value)@v (#eq? @i "title"))
 ]]
+-- local query = [[
+-- ((identifier)@i (value)@v (#any-of? @i "title" "author"))
+-- ]]
 
 -- SOME VALID QUERIES
 --[[
@@ -93,7 +93,6 @@ for id, node, metadata in parsed_query:iter_captures(document, bufnr, start_rang
     local captured_name = parsed_query.captures[id] -- name of the capture in the query
     local type = node:type()
     local text = get_text_value(bufnr, node)
-    print(id, type, text)
     if type == "value" then table.insert(titles, text) end
     -- if id ~= 1 then break end -- TODO: remove after testing
 end
@@ -103,5 +102,5 @@ end
 print(#titles)
 -- print(titles[3])
 -- print(vim.inspect(titles))
--- for i = 1, #titles do print(titles[i]) end
+for i = 1, #titles do print(titles[i]) end
 -- print(titles[1])
