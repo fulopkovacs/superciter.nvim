@@ -1,5 +1,5 @@
 -- INFO: run this file with: `:luafile%`
-local bufnr = 11
+local bufnr = 3
 local ts = vim.treesitter
 local ts_utils = require 'nvim-treesitter.ts_utils'
 
@@ -67,7 +67,7 @@ local parsed_query = ts.parse_query('bibtex', query)
 
 local ids = {}
 local titles = {}
-local bib_objects = {}
+local bib_table = {}
 
 --[[
 1. set id in metadata
@@ -122,10 +122,26 @@ for pattern, match, metadata in parsed_query:iter_matches(document, bufnr, start
   end
   -- print(captured_key_braces[match_id])
   local matched_key_brace = captured_key_braces[match_id]
-  if bib_objects[matched_key_brace] == nil then bib_objects[matched_key_brace] = {} end
-  -- bib_objects[matched_key_brace] = {}
-  bib_objects[matched_key_brace][matched_identifier] = matched_value
+  if bib_table[matched_key_brace] == nil then bib_table[matched_key_brace] = {} end
+  -- bib_table[matched_key_brace] = {}
+  bib_table[matched_key_brace][matched_identifier] = matched_value
 end
+
+local function update_bib_table(bib_table)
+  local updated_bib_table = {}
+  local i = 0
+  for k, v in pairs(bib_table) do
+    i = i + 1
+    updated_bib_table[i]  = {key_brace = k}
+    for kk, vv in pairs(v) do
+      updated_bib_table[i][kk] = vv 
+    end
+  end
+  return updated_bib_table
+end
+
+bib_table = update_bib_table(bib_table)
+
 
 -- if #ids == #titles then for i = 1, #titles do print(ids[i], titles[i]) end end
 -- print(#ids)
@@ -135,4 +151,4 @@ end
 -- for i = 1, #titles do print(titles[i]) end
 -- for i = 1, #captured_key_braces do print(captured_key_braces[i]) end
 -- print(titles[1])
-print(vim.inspect(bib_objects))
+print(vim.inspect(bib_table))
