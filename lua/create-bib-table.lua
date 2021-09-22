@@ -65,9 +65,10 @@ local function get_bib_info(parsed_query, document, bufnr, start_range, end_rang
         end
         bib_table[matched_key_brace][matched_identifier] = matched_value
     end
+    return bib_table
 end
 
-function CREATE_BIB_TABLE(bufnr)
+local function create_bib_table(bufnr)
 
     local ts = vim.treesitter
     local ts_utils = require 'nvim-treesitter.ts_utils'
@@ -102,4 +103,6 @@ function CREATE_BIB_TABLE(bufnr)
     return bib_table
 end
 
-return CREATE_BIB_TABLE
+return {
+  get_bib_info = create_bib_table
+}

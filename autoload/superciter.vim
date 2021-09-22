@@ -2,43 +2,21 @@
 " Returns the line
 function superciter#test()
   echo luaeval(
-    \ 'require("test").Test(_A)',
-    \ getline(1)
+    \ 'require("test").say_something()',
     \ )
 endfunction
 
-function superciter#find_bib_file()
-  let l:bibfile = systemlist("find . -name \"*.bib\"")
-
-  return l:bibfile
-  "/home/fulop/dev-projects/neovim-plugins/superciter.nvim/papers.bib"
+" Load the bib file into a buffer
+" and returns the last buffer's number
+function superciter#load_bib_file(bib_file_path)
+  execute "badd " . a:bib_file_path
+  let l:bib_file_buffer_num = bufnr("$")
+  return bib_file_buffer_num
 endfunction
 
-function superciter#get_papers()
-  if ! exists('g:superciter#bibfile')
-    let l:bibfile_list = superciter#find_bib_file()
-
-    if len(l:bibfile_list) > 1
-      echo "Too many bib files:"
-      echo l:bibfile_list
-      echo "Please set g:superciter#bibfile to an existing file!"
-      return
-    elseif len(l:bibfile_list) == 0
-      echo "No bibfiles found."
-      echo "Please set g:superciter#bibfile to an existing file!"
-      return
-    else
-      let g:superciter#bibfile = l:bibfile_list[0]
-    end
-  endif
-
-  let l:paper_id = luaeval(
-    \ 'require("superciter").get_papers(_A)',
-    \ g:superciter#bibfile
-    \ )
-
-  if ! empty(l:paper_id)
-    let l:line = getline('.')
-    call setline('.', strpart(l:line, 0, col('.') - 1) . l:paper_id . strpart(l:line, col('.') - 1))
-  endif
+" Get all the relevant pieces of information
+" about the bib file entries.
+function superciter#get_bib_entries_info(bib_file_buffer_num)
+  let l:bib_info = luaeval('require("create-bib-table").get_bib_info(_A)', a:bib_file_buffer_num)
+  return l:bib_info
 endfunction
