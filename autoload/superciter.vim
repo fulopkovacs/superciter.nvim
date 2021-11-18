@@ -6,6 +6,10 @@ function superciter#load_bib_file(bib_file_path)
     throw "The `g:superciter_bibfile` is unset"
   end
 
+  if ! filereadable(a:bib_file_path)
+    throw "`" . a:bib_file_path . "` doesn't exists."
+  end
+
   let l:bib_file_buffer_num = bufadd(a:bib_file_path)
   return bib_file_buffer_num
 endfunction
