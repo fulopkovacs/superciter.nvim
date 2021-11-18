@@ -40,8 +40,8 @@ function superciter#display_entry_selection_buffer(superciter_bibfile)
 
   let l:bib_file_entries_list = superciter#get_bib_entries_info(l:bib_file_buffer_num)
   let l:entry_len = { "title": 40, "author": 25, "year": 4 }
-  
-  for entry in l:bib_file_entries_list 
+
+  for entry in l:bib_file_entries_list
     for key_type in ["year", "author", "title"]
       if ! has_key(entry,  key_type)
         let entry[key_type] = ''
@@ -51,7 +51,7 @@ function superciter#display_entry_selection_buffer(superciter_bibfile)
   endfor
 
   let l:i = 0
-  for entry in l:bib_file_entries_list 
+  for entry in l:bib_file_entries_list
     let l:i = l:i + 1
     let l:i_str = string(l:i)
     if len(l:i_str) == 1
@@ -67,7 +67,7 @@ function superciter#display_entry_selection_buffer(superciter_bibfile)
     if  l:selected_entry > 0 && l:selected_entry <= len(a:entry_list)
       return a:entry_list[l:selected_entry-1]["key_brace"]
     else
-      return "" 
+      return ""
     endif
   endfunction
 
