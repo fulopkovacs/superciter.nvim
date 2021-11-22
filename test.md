@@ -2,9 +2,5 @@
 
 ## Test inserting a bibtex entry id below
 
-This is a bibtex entry:([@ah2006])Do you see it?
-second entry | 3 | 4second entry | 3 | 4second entry | 3 | 4
-[@CitekeyTechreport]
-[@CitekeyMastersthesis]
 
-
+This is a bibtex entry: [@ab94] Do you see it?
