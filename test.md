@@ -2,4 +2,5 @@
 
 ## Test inserting a bibtex entry id below
 
-This is a bibtex entry:([@CitekeyInproceedings])Do you see it?
+
+This is a bibtex entry: [@ab94] Do you see it?

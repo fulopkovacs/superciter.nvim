@@ -16,15 +16,10 @@ else
 endif
 
 
-" TODO: delete after testing
-command TestGetBibInfo :echo superciter#get_bib_entries_info(g:superciter_bibfile_bufnr)
-command TestDisplayBibInfo :call superciter#display_entry_selection_buffer(g:superciter_bibfile)
-
-
-command Cite :call superciter#display_entry_selection_buffer(g:superciter_bibfile)
+command Cite :call superciter#select_entry(g:superciter_bibfile)
 
 if !hasmapto('<Plug>Cite')
   map <LocalLeader>ct <Plug>Cite
 endif
 
-noremap <silent> <script> <Plug>Cite :call superciter#display_entry_selection_buffer(g:superciter_bibfile)<CR>
+noremap <silent> <script> <Plug>Cite :call superciter#select_entry(g:superciter_bibfile)<CR>
